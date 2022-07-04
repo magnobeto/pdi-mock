@@ -7,17 +7,17 @@ import com.example.retrofitdemo.data.model.Albums
 import com.example.retrofitdemo.data.model.AlbumsItem
 import com.example.retrofitdemo.databinding.ListItemBinding
 
-class MainAdapter: RecyclerView.Adapter<MyViewHolder>() {
+class MainAdapter : RecyclerView.Adapter<MyViewHolder>() {
     private val albumsList = Albums()
 
-    fun setList(albumsList: Albums) {
+    fun setList(list: Albums) {
         albumsList.clear()
-        albumsList.addAll(albumsList)
+        albumsList.addAll(list)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ListItemBinding = ListItemBinding.inflate(layoutInflater)
+        val binding: ListItemBinding =
+            ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
@@ -25,9 +25,7 @@ class MainAdapter: RecyclerView.Adapter<MyViewHolder>() {
         holder.bind(albumsList[position])
     }
 
-    override fun getItemCount(): Int {
-        return albumsList.size
-    }
+    override fun getItemCount(): Int = albumsList.size
 }
 
 class MyViewHolder(private val binding: ListItemBinding) :
