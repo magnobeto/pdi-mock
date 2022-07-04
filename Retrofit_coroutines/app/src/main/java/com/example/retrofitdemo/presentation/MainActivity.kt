@@ -3,10 +3,11 @@ package com.example.retrofitdemo.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.retrofitdemo.data.api.AlbumService
 import com.example.retrofitdemo.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
@@ -26,16 +27,19 @@ class MainActivity : AppCompatActivity() {
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MainAdapter()
         binding.mainRecyclerView.adapter = adapter
-        getAlbuns()
+        getAlbums()
+        observe()
     }
 
-    private fun getAlbuns() {
-        binding.mainProgressBar.visibility = View.VISIBLE
-        val responseLivaData = liveData {
-            val response = viewModel.getAlbums()
-            emit(response)
+    private fun getAlbums() {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.getAlbums()
         }
-        responseLivaData.observe(this) {
+    }
+
+    private fun observe() {
+        binding.mainProgressBar.visibility = View.VISIBLE
+        viewModel.albums.observe(this) {
             if (it != null) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
