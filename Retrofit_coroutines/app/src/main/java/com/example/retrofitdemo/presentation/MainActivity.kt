@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofitdemo.RetrofitInstance
 import com.example.retrofitdemo.data.api.AlbumService
 import com.example.retrofitdemo.databinding.ActivityMainBinding
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by inject()
     private lateinit var retrofitService: AlbumService
     private lateinit var adapter: MainAdapter
 
