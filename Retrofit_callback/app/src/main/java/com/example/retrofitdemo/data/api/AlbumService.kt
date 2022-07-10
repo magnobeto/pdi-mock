@@ -2,13 +2,14 @@ package com.example.retrofitdemo.data.api
 
 import com.example.retrofitdemo.data.model.Albums
 import com.example.retrofitdemo.data.model.AlbumsItem
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
 interface AlbumService {
 
     @GET("/albums")
-    suspend fun getAlbums(): Response<Albums>
+    fun getAlbums(): Call<Albums>
 
     @GET("/albums")
     suspend fun getSortedAlbums(@Query ("userId") userId: Int): Response<Albums>

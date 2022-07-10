@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAlbums() {
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getAlbums()
-        }
+        viewModel.getAlbums()
     }
 
     private fun observe() {

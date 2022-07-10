@@ -12,8 +12,9 @@ class MainViewModel(private val getAlbumsUseCase: GetAlbumsUseCase) : ViewModel(
     private var albumsLV = MutableLiveData<Albums>()
     val albums: LiveData<Albums> = albumsLV
 
-    suspend fun getAlbums(){
-        val response = getAlbumsUseCase.execute()
-        albumsLV.postValue(response)
+    fun getAlbums() {
+        getAlbumsUseCase.execute {
+            albumsLV.postValue(it)
+        }
     }
 }
