@@ -6,21 +6,19 @@ interface MainContract {
      * de implementação pelas camadas View e Presenter de cada uma de nossas
      * Activities ou Fragments
      */
-
-
     /**
      * Nossa LoginActivity precisa implementar os métodos definidos abaixo
      */
-    interface View : BaseView<LoginPresenter> {
-        fun displayErrorMessage()
-        fun displaySucessToast()
-        fun startHomeActivity()
+    interface View : BaseView<MainPresenter> {
+        fun initRecyclerView()
+        fun getAlbums()
+        fun observe()
     }
 
     /**
      * Nosso Presenter precisa implementar os seguintes métodos
      */
     interface Presenter : BasePresenter {
-        fun isLoginValid(userName: String, password: String)
+        suspend fun getAlbums()
     }
 }

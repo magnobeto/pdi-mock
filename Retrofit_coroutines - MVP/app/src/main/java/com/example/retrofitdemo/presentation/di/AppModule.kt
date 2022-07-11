@@ -7,7 +7,6 @@ import com.example.retrofitdemo.data.repository.AlbumsRemoteDataSourceImpl
 import com.example.retrofitdemo.data.repository.AlbumsRepositoryImpl
 import com.example.retrofitdemo.domain.AlbumsRepository
 import com.example.retrofitdemo.domain.GetAlbumsUseCase
-import com.example.retrofitdemo.presentation.MainViewModel
 import com.google.gson.GsonBuilder
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -15,10 +14,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module {
-
-    viewModel {
-        MainViewModel(get<GetAlbumsUseCase>())
-    }
 
     single<GetAlbumsUseCase> {
         GetAlbumsUseCase(get<AlbumsRepository>())

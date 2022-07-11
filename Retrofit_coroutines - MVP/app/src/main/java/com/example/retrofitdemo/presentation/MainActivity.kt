@@ -5,25 +5,29 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofitdemo.databinding.ActivityMainBinding
+import com.example.retrofitdemo.presentation.mvp.MainContract
+import com.example.retrofitdemo.presentation.mvp.MainPresenter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by inject()
     private lateinit var adapter: MainAdapter
+
+    override lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        initRecyclerView()
+        presenter = MainPresenter()
+        presenter.start(::initRecyclerView) // Chama o método responsável por dizer a View o que deve ser inicializado.
     }
 
-    private fun initRecyclerView() {
+    override fun initRecyclerView() {
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MainAdapter()
         binding.mainRecyclerView.adapter = adapter
@@ -31,15 +35,15 @@ class MainActivity : AppCompatActivity() {
         observe()
     }
 
-    private fun getAlbums() {
+    override fun getAlbums() {
         CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getAlbums()
+            presenter.getAlbums()
         }
     }
 
-    private fun observe() {
+    override fun observe() {
         binding.mainProgressBar.visibility = View.VISIBLE
-        viewModel.albums.observe(this) {
+        presenter.albums.observe(this) {
             if (it != null) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()

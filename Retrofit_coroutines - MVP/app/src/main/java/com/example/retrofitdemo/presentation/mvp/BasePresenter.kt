@@ -1,5 +1,5 @@
 package com.example.retrofitdemo.presentation.mvp
 
 interface BasePresenter {
-    fun start()
+    fun start(initView: () -> Unit)
 }
