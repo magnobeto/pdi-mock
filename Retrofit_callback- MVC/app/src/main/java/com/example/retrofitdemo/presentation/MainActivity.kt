@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity(), IMainAcitivity {
     }
 
     override fun getAlbums() {
-        CoroutineScope(Dispatchers.IO).launch {
-            mainController.getAlbums()
-        }
+        mainController.getAlbums()
     }
 
     override fun observe() {

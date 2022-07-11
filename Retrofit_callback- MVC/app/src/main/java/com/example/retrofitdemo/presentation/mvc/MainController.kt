@@ -18,8 +18,9 @@ class MainController : IMainController, KoinComponent {
         initView.invoke()
     }
 
-    override suspend fun getAlbums() {
-        val response = getAlbumsUseCase.execute()
-        albumsLV.postValue(response)
+    override fun getAlbums() {
+        getAlbumsUseCase.execute {
+            albumsLV.postValue(it)
+        }
     }
 }
