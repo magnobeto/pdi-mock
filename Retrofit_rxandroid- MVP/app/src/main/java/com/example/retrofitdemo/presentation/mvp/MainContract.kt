@@ -1,5 +1,8 @@
 package com.example.retrofitdemo.presentation.mvp
 
+import com.example.retrofitdemo.data.model.Albums
+import io.reactivex.rxjava3.core.Observer
+
 interface MainContract {
     /**
      * No contrato podemos definir todos os métodos que são mandatórios
@@ -19,6 +22,7 @@ interface MainContract {
      * Nosso Presenter precisa implementar os seguintes métodos
      */
     interface Presenter : BasePresenter {
-        suspend fun getAlbums()
+        fun getAlbums()
+        fun getAlbumsObserverRX(): Observer<Albums>
     }
 }
