@@ -41,7 +41,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
 
     // ViewModel
     def lifecycle_version = "2.4.1"
@@ -76,9 +76,8 @@ dependencies {
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:3.0.0"
-    implementation "io.reactivex.rxjava2:rxandroid:3.0.0"
-
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
