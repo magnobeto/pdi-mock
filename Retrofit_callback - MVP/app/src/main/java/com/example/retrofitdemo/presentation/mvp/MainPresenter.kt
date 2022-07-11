@@ -27,8 +27,9 @@ class MainPresenter : MainContract.Presenter, KoinComponent {
      * Principal lógica responsável pelo login e senha do nosso aplicativo
      * Simplificando a separação de camadas do software.
      */
-    override suspend fun getAlbums() {
-        val response = getAlbumsUseCase.execute()
-        albumsLV.postValue(response)
+    override fun getAlbums() {
+        getAlbumsUseCase.execute {
+            albumsLV.postValue(it)
+        }
     }
 }

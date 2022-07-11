@@ -36,9 +36,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun getAlbums() {
-        CoroutineScope(Dispatchers.IO).launch {
-            presenter.getAlbums()
-        }
+        presenter.getAlbums()
+
     }
 
     override fun observe() {

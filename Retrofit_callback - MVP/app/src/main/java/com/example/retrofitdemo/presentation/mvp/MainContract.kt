@@ -19,6 +19,6 @@ interface MainContract {
      * Nosso Presenter precisa implementar os seguintes métodos
      */
     interface Presenter : BasePresenter {
-        suspend fun getAlbums()
+        fun getAlbums()
     }
 }
